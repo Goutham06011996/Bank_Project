@@ -1,0 +1,350 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>GK-BANK - Application</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon" />
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icon Font Stylesheet -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- Spinner Start -->
+    <div
+      id="spinner"
+      class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
+    >
+      <div class="spinner-grow text-primary" role="status"></div>
+    </div>
+    <!-- Spinner End -->
+
+ <!-- Topbar Start -->
+    <div
+      class="container-fluid custom-bg text-white py-2 px-0 d-none d-lg-block"
+    >
+      <div class="row gx-0 align-items-center">
+        <div class="col-lg-7 px-5 text-start">
+          <div class="h-100 d-inline-flex align-items-center me-4">
+            <small class="far fa-envelope-open me-2"></small>
+            <small>info@gk-bank.com</small>
+          </div>
+          <div class="h-100 d-inline-flex align-items-center me-4">
+            <small class="far fa-clock me-2"></small>
+            <small>Mon - Fri : 10 AM - 5 PM</small>
+          </div>
+        </div>
+        <div class="col-lg-5 px-5 text-end">
+          <div class="h-100 d-inline-flex align-items-center">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Navbar Start -->
+    <nav
+      class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5"
+    >
+      <a class="navbar-brand d-flex align-items-center">
+        <h1 class="m-0">
+          <img
+            class="img-fluid me-3"
+            src="{% static 'img/icon/GK-BANK.png' %}"
+            alt=""
+          />GK-BANK
+        </h1>
+      </a>
+      <button
+        type="button"
+        class="navbar-toggler"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav mx-auto bg-light rounded pe-4 py-3 py-lg-0">
+<!--          <a href="landing.html" class="nav-item nav-link">Profile</a>-->
+<!--          <div class="nav-item dropdown">-->
+<!--            <a-->
+<!--              href="#"-->
+<!--              class="nav-link dropdown-toggle active"-->
+<!--              data-bs-toggle="dropdown"-->
+<!--              >Hi, {{username}}</a-->
+<!--            >-->
+<!--            <div class="dropdown-menu bg-light border-0 m-0">-->
+<!--              <a href="feature.html" class="dropdown-item">Features</a>-->
+<!--              <a href="appointment.html" class="dropdown-item">Appointment</a>-->
+<!--              <a href="team.html" class="dropdown-item">Team Members</a>-->
+<!--              <a href="testimonial.html" class="dropdown-item">Testimonial</a>-->
+<!--              <a href="404.html" class="dropdown-item active">404 Page</a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <a href="contact.html" class="nav-item nav-link">Contact Us</a>-->
+        </div>
+      </div>
+      <a href="{% url 'credentials:logout' %}" class="btn btn-primary px-3 d-none d-lg-block"><b>Logout</b></a>
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- Page Header Start -->
+    <div
+      class="container-fluid page-header py-5 mb-5 wow fadeIn"
+      data-wow-delay="0.1s"
+    >
+      <div class="container py-5">
+        <h2 class="display-4 animated slideInDown mb-4">Application Form</h2>
+        {% if username %}
+          <h2>{{ username }}</h2>
+        {% endif %}
+        <nav aria-label="breadcrumb animated slideInDown">
+        </nav>
+      </div>
+    </div>
+    <!-- Page Header End -->
+
+    <!-- Appointment Start -->
+    <div class="container-fluid py-15 wow fadeIn" data-wow-delay="0.1s">
+      <div class="container" >
+        <div class="row g-6">
+          <div class="col-lg-3 wow fadeIn" data-wow-delay="0.3s">
+            <h1 class="display-6 mb-5">
+            </h1>
+            <p class="mb-8">
+            </p>
+
+          </div>
+<form method="post" action="{% url 'bankapp:application_form' %}">
+            {% csrf_token %}
+          <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+  <div class="bg-light rounded p-5">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Name" required aria-label="name">
+            <label for="name">Name</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-floating">
+            <input type="date" class="form-control form-control-lg" id="date" name="date" placeholder="Date" aria-label="date" max="{% now 'Y-m-d' %}" min="{{ now|date:'Y' }}-100">
+            <label for="dob">Date of Birth</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-floating">
+            <select class="form-control" id="gender" name="gender" required>
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+            <label for="gender">Gender</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-floating">
+            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone Number" required>
+            <label for="phone">Phone Number</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-floating">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+            <label for="email">Email</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="address" name="address" placeholder="Address" required>
+            <label for="address">Address</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-floating">
+            <select class="form-control" id="district" name="district" onchange="populateBranches(this.value)" required>
+                <option value="">Select District</option>
+                    {% for district in districts %}
+                    <option value="{{ district.id }}">{{ district.name }}</option>
+                    {% endfor %}
+            </select>
+            <label for="district">District</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-floating">
+<select class="form-select" id="branch" name="branch" aria-label="Select Branch">
+    <option selected>Select Branch</option>
+</select>
+
+            <label for="branch">Branch</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-floating">
+            <select class="form-select" id="account_type" name="account_type" aria-label="Select Account Type">
+              <option selected>Select Account Type</option>
+              <option value="savings">Savings Account</option>
+              <option value="current">Current Account</option>
+              <option value="fixed-deposit">Fixed Deposit</option>
+            </select>
+            <label for="account_type">Account Type</label>
+          </div>
+        </div>
+<div class="col-md-6">
+    <p>Materials Provide:</p>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="debit_card" name="debit_card" value="debit_card">
+        <label class="form-check-label" for="debit_card">Debit Card</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="credit_card" name="credit_card" value="credit_card">
+        <label class="form-check-label" for="credit_card">Credit Card</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="cheque_book" name="cheque_book" value="cheque_book">
+        <label class="form-check-label" for="cheque_book">Cheque Book</label>
+    </div>
+</div>
+          <div class="col-md-6">
+  <div class="form-floating">
+    <input type="hidden" class="form-control" id="user_id" name="user_id" value="{{user_id}}">
+    <label for="user_id"></label>
+  </div>
+</div>
+
+        <div class="col-12">
+          <button class="btn btn-primary py-3 px-5 center" type="submit" >
+            Submit
+          </button>
+                  </div>
+                </div>
+              </>
+            </div>
+          </form>
+<script>
+function populateBranches(districtId) {
+  // Clear existing branch options
+  var branchSelect = document.getElementById('branch');
+  branchSelect.innerHTML = '<option value="">Select Branch</option>';
+
+  // Make AJAX request to load branches for selected district
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', '/ajax/load-branches/?district_id=' + districtId, true);
+  xhr.onload = function() {
+    if (this.status == 200) {
+      // Parse JSON response and populate branch options
+      var branches = JSON.parse(this.response).branches;
+      var branchSelect = document.getElementById('branch');
+      for (var i = 0; i < branches.length; i++) {
+        var option = document.createElement('option');
+        // Set branch id and name as option value and text
+        option.value = branches[i].id;
+        option.text = branches[i].name;
+
+        // Append option to branch select
+        branchSelect.appendChild(option);
+      }
+    } else {
+      console.error('Unable to load branches.');
+    }
+  };
+  xhr.send();
+}
+</script>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Appointment End -->
+
+    <!-- Footer Start -->
+    <div
+      class="container-fluid  custom-bg text-white footer 100vh mt-5 pt-2 wow fadeIn"
+      data-wow-delay="0.1s"
+    >
+      <div class="container py-4">
+        <div class="row g-5">
+          <div class="col-lg-3 col-md-6">
+            <h1 class="text-white mb-4">
+              <img
+                class="img-fluid me-3"
+                src="{% static 'img/icon/GK-BANK.png' %}"
+                alt=""
+              />GK-BANK
+            </h1>
+            <p>
+              © All rights reserved.[GK-BANK] [2023]
+            </p>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <h5 class="text-light mb-4">Address</h5>
+            <p>
+              <i class="fa fa-map-marker-alt me-3"></i>Head Quaters,Mumbai India
+            </p>
+            <p><i class="fa fa-phone-alt me-3"></i>+91XXXXXXXXXX</p>
+            <p><i class="fa fa-envelope me-3"></i>info@gk-bank.com</p>
+          </div>
+          <div class="col-lg-3 col-md-6">
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <h5 class="text-light mb-4">Newsletter</h5>
+            <p>Stay up-to-date with our latest products and services.</p>
+            <div class="position-relative mx-auto" style="max-width: 400px">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer End -->
+
+<!--    &lt;!&ndash; Back to Top &ndash;&gt;-->
+<!--    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"-->
+<!--      ><i class="bi bi-arrow-up"></i-->
+<!--    ></a>-->
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>
